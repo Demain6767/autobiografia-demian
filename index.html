@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demian Amaya — Autobiography</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0F172A;
+    --slate: #334155;
+    --green: #22C55E;
+    --green-dim: rgba(34,197,94,0.12);
+    --green-glow: rgba(34,197,94,0.25);
+    --white: #F8FAFC;
+    --muted: #94A3B8;
+    --border: rgba(248,250,252,0.07);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: .6;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--navy); }
+  ::-webkit-scrollbar-thumb { background: var(--green); border-radius: 2px; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(15,23,42,0.82);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+    transition: padding .3s;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: .02em;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--green); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: .78rem;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color .25s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: 0;
+    width: 0; height: 1px;
+    background: var(--green);
+    transition: width .3s;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* ── HAMBURGER ── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px; height: 2px;
+    background: var(--white);
+    transition: transform .3s, opacity .3s;
+    border-radius: 2px;
+  }
+
+  /* ── HERO ── */
+  #home {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 7rem 4rem 4rem;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(34,197,94,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 50% at 20% 80%, rgba(51,65,85,0.4) 0%, transparent 60%);
+  }
+
+  /* Drum-kit waveform decoration */
+  .hero-wave {
+    position: absolute;
+    right: 0; bottom: 0;
+    width: 45%;
+    opacity: .04;
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    position: relative;
+    max-width: 780px;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: .6rem;
+    font-size: .72rem;
+    font-weight: 500;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 1.4rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 28px; height: 1px;
+    background: var(--green);
+  }
+
+  h1.hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -.02em;
+    margin-bottom: .5rem;
+  }
+
+  h1.hero-title em {
+    font-style: italic;
+    color: var(--green);
+  }
+.photo-box img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+  .hero-subtitle {
+    font-size: clamp(.85rem, 1.5vw, 1.05rem);
+    font-weight: 400;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+
+  .hero-quote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 1.8vw, 1.25rem);
+    color: var(--muted);
+    border-left: 2px solid var(--green);
+    padding-left: 1.2rem;
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+  }
+
+  .hero-para {
+    font-size: .95rem;
+    color: #CBD5E1;
+    max-width: 580px;
+    margin-bottom: 2.5rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .75rem 1.8rem;
+    border: 1px solid var(--green);
+    color: var(--green);
+    font-family: 'Poppins', sans-serif;
+    font-size: .8rem;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background .25s, color .25s;
+    border-radius: 2px;
+  }
+
+  .btn:hover { background: var(--green); color: var(--navy); }
+
+  /* ── PHOTO PLACEHOLDER ── */
+  .photo-box {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: var(--slate);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    color: var(--muted);
+    font-size: .75rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .photo-box::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(34,197,94,.04) 0%, transparent 60%);
+  }
+
+  .photo-icon {
+    width: 40px; height: 40px;
+    stroke: var(--green);
+    opacity: .4;
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 7rem 4rem; }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: .6rem;
+    font-size: .68rem;
+    font-weight: 600;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 1rem;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 20px; height: 1px;
+    background: var(--green);
+  }
+
+  h2.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -.01em;
+    margin-bottom: 2rem;
+  }
+
+  h2.section-title em { font-style: italic; color: var(--green); }
+
+  .section-text {
+    font-size: .94rem;
+    color: #CBD5E1;
+    max-width: 640px;
+    margin-bottom: 1.2rem;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    margin: 0 4rem;
+    width: calc(100% - 8rem);
+  }
+
+  /* ── TWO-COL LAYOUT ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .two-col.reverse { direction: rtl; }
+  .two-col.reverse > * { direction: ltr; }
+
+  /* ── EARLY LIFE ── */
+  #early-life { background: var(--navy); }
+
+  /* ── CHALLENGES ── */
+  #challenges { background: #0B1120; }
+
+  .challenge-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .card {
+    background: rgba(51,65,85,0.25);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color .3s, transform .3s;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--green);
+  }
+
+  .card:hover { border-color: rgba(34,197,94,.3); transform: translateY(-4px); }
+
+  .card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    margin-bottom: .6rem;
+  }
+
+  .card p { font-size: .88rem; color: #94A3B8; line-height: 1.65; }
+
+  /* ── ACHIEVEMENTS ── */
+  #achievements { background: var(--navy); }
+
+  .ach-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.8rem;
+    margin-top: 2.5rem;
+  }
+
+  .ach-item {
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+  }
+
+  .ach-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--green);
+    line-height: 1;
+    opacity: .25;
+  }
+
+  .ach-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+
+  .ach-desc { font-size: .85rem; color: var(--muted); line-height: 1.6; }
+
+  /* ── WHO I AM ── */
+  #who-i-am { background: #0B1120; }
+
+  .traits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .7rem;
+    margin: 1.5rem 0;
+  }
+
+  .trait {
+    padding: .4rem 1rem;
+    border: 1px solid rgba(34,197,94,.35);
+    border-radius: 100px;
+    font-size: .78rem;
+    font-weight: 500;
+    letter-spacing: .06em;
+    color: var(--green);
+    background: var(--green-dim);
+  }
+
+  /* ── FUTURE ── */
+  #future { background: var(--navy); }
+
+  .timeline {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--green), transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding: 0 0 2.5rem 2rem;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -4px; top: 6px;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 10px var(--green-glow);
+  }
+
+  .timeline-item h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    margin-bottom: .3rem;
+  }
+
+  .timeline-item p { font-size: .88rem; color: var(--muted); }
+
+  /* ── REFLECTION ── */
+  #reflection {
+    background: #0B1120;
+    text-align: center;
+  }
+
+  #reflection .section-label { justify-content: center; }
+  #reflection .section-label::before { display: none; }
+  #reflection h2.section-title { margin: 0 auto 2rem; }
+
+  .reflection-quote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    color: var(--white);
+    max-width: 720px;
+    margin: 0 auto 3rem;
+    line-height: 1.5;
+    opacity: .9;
+  }
+
+  .reflection-paras {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .reflection-paras p { font-size: .9rem; color: #94A3B8; }
+
+  /* ── GALLERY ── */
+  #gallery { background: var(--navy); }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 2.5rem;
+  }
+
+  .gallery-grid .photo-box:nth-child(1) { grid-column: span 2; aspect-ratio: 16/7; }
+  .gallery-grid .photo-box:nth-child(5) { grid-column: span 2; aspect-ratio: 16/7; }
+  .gallery-grid .photo-box:nth-child(9) { grid-column: span 3; aspect-ratio: 21/5; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #060E1A;
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
+
+  .footer-name span { color: var(--green); }
+
+  .footer-tagline {
+    font-size: .82rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .footer-thanks {
+    font-style: italic;
+    color: var(--muted);
+    font-size: .88rem;
+    margin-top: .5rem;
+  }
+
+  .footer-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 12px var(--green);
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 2rem; }
+    .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(15,23,42,.97); padding: 1.5rem 2rem; gap: 1.2rem; border-bottom: 1px solid var(--border); }
+    .nav-links.open { display: flex; }
+    .hamburger { display: flex; }
+    section { padding: 5rem 2rem; }
+    #home { padding: 7rem 2rem 4rem; }
+    .two-col { grid-template-columns: 1fr; gap: 3rem; }
+    .two-col.reverse { direction: ltr; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-grid .photo-box:nth-child(1),
+    .gallery-grid .photo-box:nth-child(5) { grid-column: span 2; aspect-ratio: 16/7; }
+    .gallery-grid .photo-box:nth-child(9) { grid-column: span 2; aspect-ratio: 16/7; }
+    footer { padding: 3rem 2rem; }
+    .divider { margin: 0 2rem; width: calc(100% - 4rem); }
+  }
+
+  @media (max-width: 540px) {
+    h1.hero-title { font-size: 2.8rem; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .gallery-grid .photo-box:nth-child(1),
+    .gallery-grid .photo-box:nth-child(5),
+    .gallery-grid .photo-box:nth-child(9) { grid-column: span 1; aspect-ratio: 4/3; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">D<span>.</span>Amaya</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#early-life">Early Life</a></li>
+    <li><a href="#challenges">Challenges</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#who-i-am">Who I Am</a></li>
+    <li><a href="#future">Future</a></li>
+    <li><a href="#reflection">Reflection</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="home">
+  <div class="hero-bg"></div>
+
+  <!-- Waveform SVG -->
+  <svg class="hero-wave" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+    <polyline points="0,200 30,160 60,220 90,130 120,240 150,100 180,250 210,90 240,260 270,80 300,270 330,75 360,265 390,85 420,255 450,95 480,245 510,100 540,240 570,120 600,220 630,155 660,205 690,175 720,195 750,180 800,200" fill="none" stroke="white" stroke-width="3"/>
+  </svg>
+
+  <div class="hero-inner">
+    <div class="hero-eyebrow fade-up">Autobiography</div>
+    <h1 class="hero-title fade-up">Demian<br><em>Amaya</em></h1>
+    <p class="hero-subtitle fade-up">Student · Musician · Future Clinical Chemist</p>
+    <blockquote class="hero-quote fade-up">
+      "Honesty is the foundation of growth because only by being honest with ourselves can we become better people."
+    </blockquote>
+    <p class="hero-para fade-up">
+      I am Demian Amaya, a student from Cananea, Sonora, Mexico. I am passionate about music, sports, entertainment, and personal growth. I enjoy watching shows, reading, playing the drums, and constantly challenging myself to improve. Although I am still discovering my purpose in life, I strive to make meaningful progress every day. I believe that honesty, discipline, and creativity are essential qualities that help people reach their full potential.
+    </p>
+    <a href="#early-life" class="btn fade-up">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      Discover My Story
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── EARLY LIFE ── -->
+<section id="early-life">
+  <div class="two-col">
+    <div class="fade-up">
+      <div class="section-label">Chapter One</div>
+      <h2 class="section-title">Early <em>Life</em></h2>
+      <p class="section-text">
+        I was born on October 10, 2008, in Cananea, Sonora, where I have lived my entire life. I grew up with my mother and my brother, who have always been important parts of my life. My mother has been a major influence because she has taught me valuable lessons that continue to guide me today.
+      </p>
+      <p class="section-text">
+        I attended INAM during kindergarten and later studied at Minerva Elementary School. One unusual aspect of my childhood is that I do not remember much about my life before the fourth grade.
+      </p>
+      <p class="section-text">
+        During elementary school, I was a quiet child with few friends, but I was also very athletic and one of the fastest students in school. I became interested in horror content and YouTube videos. My favorite movie was <em>How to Train Your Dragon</em>, which I watched with my cousin Emilio.
+      </p>
+    </div>
+    <div class="fade-up">
+      <div class="photo-box" style="aspect-ratio:3/4;">
+    <img src="imagenes/01-infancia.jpeg" alt="Childhood">
+</div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── CHALLENGES ── -->
+<section id="challenges">
+  <div class="fade-up">
+    <div class="section-label">Chapter Two</div>
+    <h2 class="section-title">Challenges &amp; <em>Lessons</em></h2>
+    <p class="section-text" style="max-width:700px;">
+      I have faced several challenges in my life, but I am grateful for the people who make everything easier. These experiences shaped my resilience, optimism, and the importance of focusing on the present moment.
+    </p>
+  </div>
+  <div class="challenge-cards">
+    <div class="card fade-up">
+      <h3>Pressure to Improve</h3>
+      <p>One of the biggest challenges has been the constant pressure to improve myself. Sometimes I feel like I cannot satisfy my father's expectations, but I continue trying my best every single day.</p>
+    </div>
+    <div class="card fade-up" style="transition-delay:.1s">
+      <h3>A Health Scare</h3>
+      <p>I once became seriously ill and experienced symptoms that suggested I might have a severe medical condition. It was one of the most frightening moments of my life and taught me to truly appreciate my health.</p>
+    </div>
+    <div class="card fade-up" style="transition-delay:.2s">
+      <h3>Resilience &amp; Growth</h3>
+      <p>These experiences taught me that challenges are not the end — they are teachers. Resilience, optimism, and focusing on the present moment are the gifts these difficult times gave me.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── ACHIEVEMENTS ── -->
+<section id="achievements">
+  <div class="two-col reverse">
+    <div class="fade-up">
+      <div class="section-label">Chapter Three</div>
+      <h2 class="section-title">My <em>Achievements</em></h2>
+      <p class="section-text">
+        From science competitions to live performances, my achievements reflect a passion for learning, creativity, and pushing boundaries.
+      </p>
+      <div class="ach-grid">
+        <div class="ach-item">
+          <div class="ach-number">01</div>
+          <div class="ach-title">Science Competition</div>
+          <p class="ach-desc">Won a science competition during middle school at Tecnológico de Cananea — sparking a love for chemistry.</p>
+        </div>
+        <div class="ach-item">
+          <div class="ach-number">02</div>
+          <div class="ach-title">Feria del Cobre</div>
+          <p class="ach-desc">Performed on drums at the Feria del Cobre, one of the most memorable experiences of my musical journey.</p>
+        </div>
+        <div class="ach-item">
+          <div class="ach-number">03</div>
+          <div class="ach-title">Band: Amelia</div>
+          <p class="ach-desc">Founded my own band, Amelia, where I continue to develop my musical skills and create memorable experiences.</p>
+        </div>
+        <div class="ach-item">
+          <div class="ach-number">04</div>
+          <div class="ach-title">Sports</div>
+          <p class="ach-desc">Participated in volleyball events in Cananea and Agua Prieta; practiced boxing, baseball, and wrestling.</p>
+        </div>
+      </div>
+    </div>
+    <div class="fade-up">
+      <div class="photo-box" style="aspect-ratio:3/4;">
+    <img src="imagenes/02-infancia.jpeg" alt="Childhood">
+
+        
+          <rect x="3" y="3" width="18" height="3" rx="2" stroke-width="1.5" stroke="currentColor"/>
+          <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="photo-box" style="aspect-ratio:2/4;">
+    <img src="imagenes/03-infancia.jpeg" alt="Childhood">
+
+          <rect x="3" y="3" width="18" height="18" rx="2" stroke-width="1.5" stroke="currentColor"/>
+          <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── WHO I AM ── -->
+<section id="who-i-am">
+  <div class="two-col">
+    <div class="fade-up">
+      <div class="photo-box" style="aspect-ratio:3/4;">
+    <img src="imagenes/04-infancia.jpeg" alt="Childhood">
+        <svg class="photo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        
+      </div>
+    </div>
+    <div class="fade-up">
+      <div class="section-label">Chapter Four</div>
+      <h2 class="section-title">Who I Am <em>Today</em></h2>
+      <p class="section-text">
+        Today, I am a creative, selective, and spontaneous person who enjoys trying new things and meeting new people. I value honesty above everything else because I believe being honest with yourself is the key to personal growth.
+      </p>
+      <p class="section-text">
+        Music, sports, science, and self-improvement are important parts of my identity. The people who have influenced me the most are my mother, my brother, and my closest friends.
+      </p>
+      <div class="traits">
+        <span class="trait">Creative</span>
+        <span class="trait">Selective</span>
+        <span class="trait">Spontaneous</span>
+        <span class="trait">Honest</span>
+        <span class="trait">Disciplined</span>
+        <span class="trait">Musician</span>
+        <span class="trait">Athlete</span>
+        <span class="trait">Curious</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── FUTURE ── -->
+<section id="future">
+  <div class="two-col">
+    <div class="fade-up">
+      <div class="section-label">Chapter Five</div>
+      <h2 class="section-title">My Future <em>Vision</em></h2>
+      <p class="section-text">
+        I plan to study Clinical Chemistry and Biology because I enjoy science and want a stable, fulfilling career. I also plan to continue playing music and eventually own my own music studio.
+      </p>
+      <p class="section-text">
+        In ten years, I see myself traveling, working in science, making music, and continuing to improve as a person.
+      </p>
+      <div class="timeline">
+        <div class="timeline-item">
+          <h4>Study Clinical Chemistry &amp; Biology</h4>
+          <p>Pursue higher education in science for a stable career I love.</p>
+        </div>
+        <div class="timeline-item">
+          <h4>Work in a Laboratory</h4>
+          <p>Apply my knowledge professionally while continuing to grow.</p>
+        </div>
+        <div class="timeline-item">
+          <h4>Own a Music Studio</h4>
+          <p>Blend science and art — keep making music a part of my life forever.</p>
+        </div>
+        <div class="timeline-item">
+          <h4>Travel &amp; Keep Improving</h4>
+          <p>See the world and never stop challenging myself to be better.</p>
+        </div>
+      </div>
+    </div>
+    <div class="fade-up">
+      <div class="photo-box" style="aspect-ratio:3/4;">
+    <img src="imagenes/05-infancia.jpeg" alt="Childhood">
+        <svg class="photo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── REFLECTION ── -->
+<section id="reflection">
+  <div class="section-label fade-up">Chapter Six</div>
+  <h2 class="section-title fade-up">Reflection</h2>
+  <p class="reflection-quote fade-up">
+    "Life has taught me that many of the things we worry about never happen the way we imagine."
+  </p>
+  <div class="reflection-paras">
+    <p class="fade-up">Every challenge I have faced has helped me become stronger and taught me valuable lessons that no classroom could provide.</p>
+    <p class="fade-up" style="transition-delay:.1s">I have learned that happiness comes from growth, meaningful relationships, and appreciating opportunities rather than trying to be perfect.</p>
+    <p class="fade-up" style="transition-delay:.2s">Growth is not a destination — it is a continuous journey shaped by honesty, resilience, and the courage to keep moving forward.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── GALLERY ── -->
+<section id="gallery">
+  <div class="fade-up">
+    <div class="section-label">Photo Gallery</div>
+    <h2 class="section-title">My <em>Moments</em></h2>
+    <p class="section-text">A collection of personal photographs capturing the people, places, and experiences that have shaped who I am.</p>
+  </div>
+
+  <div class="gallery-grid">
+    <!-- 1: wide -->
+    <div class="photo-box fade-up">
+    <img src="imagenes/galeria1.jpeg" alt="Gallery Photo">
+      <svg class="photo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="2" stroke-width="1.5" stroke="currentColor"/><circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+    <!-- 2 -->
+    <div class="photo-box fade-up">
+    <img src="imagenes/galeria2.jpeg" alt="Gallery Photo">
+      <svg class="photo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="2" stroke-width="1.5" stroke="currentColor"/><circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+     
+    </div>
+    <!-- 3 -->
+    <div class="photo-box fade-up">
+    <img src="imagenes/galeria3.jpeg" >
+      <svg class="photo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="2" stroke-width="1.5" stroke="currentColor"/><circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+ 
+    </div>
+    <!-- 4 -->
+<div class="photo-box fade-up">
+    <img src="imagenes/galeria4.jpeg" alt="Gallery Photo">
+      <svg class="photo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="2" stroke-width="1.5" stroke="currentColor"/><circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+  
+    </div>
+    <!-- 5: wide -->
+    <div class="photo-box fade-up">
+    <img src="imagenes/galeria5.jpeg" alt="Gallery Photo">
+      <svg class="photo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="2" stroke-width="1.5" stroke="currentColor"/><circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+
+    </div>
+    <!-- 6 -->
+<div class="photo-box fade-up">
+    <img src="imagenes/galeria6.jpeg" alt="Gallery Photo">
+      <svg class="photo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="2" stroke-width="1.5" stroke="currentColor"/><circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+    <!-- 7 -->
+<div class="photo-box fade-up">
+    <img src="imagenes/galeria7.jpeg" alt="Gallery Photo">
+      <svg class="photo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="2" stroke-width="1.5" stroke="currentColor"/><circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span>Add Your Photo Here</span>
+    </div>
+    <!-- 8 -->
+  <div class="photo-box fade-up">
+    <img src="imagenes/galeria8.jpeg" alt="Gallery Photo">
+      <svg class="photo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="2" stroke-width="1.5" stroke="currentColor"/><circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+
+    </div>
+    <!-- 9: full-width banner -->
+   <div class="photo-box fade-up">
+    <img src="imagenes/galeria9.jpeg" alt="Gallery Photo">
+      <svg class="photo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="2" stroke-width="1.5" stroke="currentColor"/><circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-dot"></div>
+  <div class="footer-name">Demian <span>Amaya</span></div>
+  <div class="footer-tagline">Student · Musician · Future Clinical Chemist</div>
+  <p class="footer-thanks">Thank you for visiting my autobiography.</p>
+  <div class="footer-dot"></div>
+</footer>
+
+<script>
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+
+  // Close menu on link click
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  // Intersection Observer for fade-up
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  fadeEls.forEach(el => observer.observe(el));
+
+  // Trigger hero elements immediately
+  document.querySelectorAll('#home .fade-up').forEach((el, i) => {
+    setTimeout(() => el.classList.add('visible'), 200 + i * 120);
+  });
+</script>
+</body>
+</html>
